@@ -1,8 +1,3 @@
-/**
- * js扩展
- * 请不要把业务相关的方法写在这里
- */
-
 const DATE_FMTS = ['', '', '', '', 'yyyy', '', 'yyyyMM', 'yyyy-MM', 'yyyyMMdd', '', 'yyyy-MM-dd', '', 'yyyyMMddhhmm', '', 'yyyyMMddhhmmss', '', 'yyyy-MM-dd hh:mm', '', '', 'yyyy-MM-dd hh:mm:ss']
 
 // 根据格式获取日期值(field: y,M,d,h,m,s,S, fmt: yyyyMMdd)
