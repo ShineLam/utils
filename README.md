@@ -155,14 +155,14 @@
     console.log(date.addMonth(1)) // Sat Jul 23 2022 17:15:09 GMT+0800 (中国标准时间)
 ```
 
-## ay.prototype.oneByOne
+## Array.prototype.oneByOne
 ### 按顺序执行
 
 ```js
   /*
    * @callback cb
    * @callback done
-   * @call .oneByOne(cb, done)
+   * @call arr.oneByOne(cb, done)
   */
   let list = [1, 2, 3]
   list.oneByOne((item, next) => {
@@ -174,14 +174,107 @@
   // 1 2 3 done
 ```
 
-## ay.prototype.fetch
+## Array.prototype.fetch
 ### 提取数组元素中的字段
 
 ```js
   /*
    * @param {String} name
-   * @call .fetch(name)
+   * @call arr.fetch(name)
   */
   let list = [{ name: 'Ethan' }, { name: 'Linna' }, { name: 'Ryan' }]
   console.log(list.fetch('name')) // ["Ethan", "Linna", "Ryan"]
+```
+
+## Array.prototype.groupBy
+### 一维数组按字段分组
+
+```js
+  /*
+   * @param {String} name
+   * @call arr.groupBy(name)
+  */
+  let list = [{ name: 'Ethan', sex: 'male' }, { name: 'Linna', sex: 'female' }, { name: 'Ryan', sex: 'male' }]
+  let res = list.groupBy('sex')
+  console.log(res)
+  // [
+  //{count: 2, name: 'male', subs: [{name: 'Ethan', sex: 'male'}, {name: 'Ryan', sex: 'male'}]}, 
+  //{count: 1, name: 'female', subs: [{name: 'Linna', sex: 'female'}]}
+  //]
+```
+
+## Function.prototype.args
+### 追加传入参数
+
+```js
+  /*
+   * @param {Object} arguments
+   * @call .fetch(name)
+  */
+  function fn(parmas, cb) {
+    console.log(parmas)
+    cb && cb()
+  }
+
+  function test(cb, fb) {
+    fn.args(this, fb)('p1', () => {
+      if (condition) {
+        cb && cb()
+      } else {
+        fb && fb()
+      }
+    })
+  }
+
+  test(() => {
+    console.log('cb')
+  }, () => {
+    console.error('fb')
+  })
+```
+
+## Function.prototype.mixin
+### 混入
+
+```js
+  /*
+   * @param {Function} fn
+   * @call function.mixin(fn)
+  */
+    function fn1() {
+      console.log(1)
+    }
+    function fn2() {
+      console.log(2)
+    }
+    fn1.mixin(fn2)() // 1 2
+```
+
+## Function.prototype.timeout
+### 延时执行
+
+```js
+  /*
+   * @param {Number} time
+   * @call function.timeout(time)
+  */
+    function fn() {
+      console.log(1)
+    }
+    fn1.timeout(500, this)() // 1
+```
+
+## Function.prototype.countdown
+### 倒计时
+
+```js
+  /*
+   * @param {Number} count 运行次数
+   * @param {Number} delay 间隔时间(毫秒)
+   * @call function.countdown(count, delay)
+  */
+    function fn(count) {
+      console.log(count)
+    }
+    fn.countdown(60, 1000, this)() // 60 59 ... 1
 ```

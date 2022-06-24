@@ -135,22 +135,6 @@ Array.prototype.fetch = function (name) {
   return list
 }
 
-// 非空映射
-Array.prototype.nmap = function (cb, rstList, unshift) {
-  var list = rstList || []
-  for (var i = 0, val, item; item = this[i++];) {
-    val = cb (item, i, this)
-    if (val !== null && val != undefined && val !== '') {
-      if (unshift) {
-        list.unshift(val)
-      } else {
-        list.push(val)
-      }
-    }
-  }
-  return list
-}
-
 Function.prototype.saturate = function (scope /*, args */ ) {
   var fn = this
   var afters = [].slice.call(arguments, 1)
